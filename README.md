@@ -73,7 +73,6 @@ Ikuti langkah-langkah berikut untuk menjalankan simulasi di perangkat kamu:
 
 ![Gambar Topologi](<img width="611" height="394" alt="{42D61558-D337-4CD6-AA08-7988571F4DEE}" src="https://github.com/user-attachments/assets/0799e3bc-58b4-4c02-be9d-72cdb14cad82" />
 )
-*(Catatan: Ganti path gambar di atas sesuai dengan letak screenshot topologi kamu di repositori)*
 
 Setiap blok topologi terdiri dari:
 * **3x Router Cisco 2911** (Router Tengah/Atas, Router Kiri, dan Router Kanan)
