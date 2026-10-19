@@ -56,6 +56,7 @@ Ikuti langkah-langkah berikut untuk menjalankan simulasi di perangkat kamu:
 ### 2. Langkah Membuka Proyek
 1. **Clone** repositori ini atau unduh langsung file `ROUTING.pkt`:
    ```bash
+   git clone [https://github.com/username-kamu/nama-repo-kamu.git](https://github.com/username-kamu/nama-repo-kamu.git)
    ```
 2. Buka aplikasi **Cisco Packet Tracer** dan *login* menggunakan akun Cisco NetAcad / Skills for All kamu.
 3. Klik menu **File > Open**, lalu pilih file **`ROUTING.pkt`**.
@@ -69,7 +70,9 @@ Ikuti langkah-langkah berikut untuk menjalankan simulasi di perangkat kamu:
 
 ## 🖧 Topologi & Skema Pengalamatan IP
 
-![Gambar Topologi](assets/topology.png)
+
+![Gambar Topologi](<img width="611" height="394" alt="{42D61558-D337-4CD6-AA08-7988571F4DEE}" src="https://github.com/user-attachments/assets/0799e3bc-58b4-4c02-be9d-72cdb14cad82" />
+)
 *(Catatan: Ganti path gambar di atas sesuai dengan letak screenshot topologi kamu di repositori)*
 
 Setiap blok topologi terdiri dari:
