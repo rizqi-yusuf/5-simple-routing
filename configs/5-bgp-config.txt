@@ -1,0 +1,98 @@
+! ==========================================================
+! SKENARIO 5: eBGP CONFIGURATION (AS 100, AS 200, AS 300)
+! Topologi : 3 Router (R-Kiri=AS100, R-Tengah=AS200, R-Kanan=AS300)
+! ==========================================================
+
+
+! ----------------------------------------------------------
+! 1. ROUTER TENGAH (AS 200)
+! ----------------------------------------------------------
+enable
+configure terminal
+hostname R-Tengah
+
+! Konfigurasi Interface
+interface GigabitEthernet0/0
+ description Link-to-R-Kiri-AS100
+ ip address 200.10.10.1 255.255.255.252
+ no shutdown
+exit
+
+interface GigabitEthernet0/1
+ description Link-to-R-Kanan-AS300
+ ip address 200.20.20.1 255.255.255.252
+ no shutdown
+exit
+
+! Konfigurasi eBGP AS 200
+router bgp 200
+ neighbor 200.10.10.2 remote-as 100
+ neighbor 200.20.20.2 remote-as 300
+ network 200.10.10.0 mask 255.255.255.252
+ network 200.20.20.0 mask 255.255.255.252
+exit
+
+end
+write memory
+
+
+! ----------------------------------------------------------
+! 2. ROUTER KIRI (AS 100)
+! ----------------------------------------------------------
+enable
+configure terminal
+hostname R-Kiri
+
+! Konfigurasi Interface
+interface GigabitEthernet0/0
+ description Link-to-R-Tengah-AS200
+ ip address 200.10.10.2 255.255.255.252
+ no shutdown
+exit
+
+interface GigabitEthernet0/1
+ description Gateway-LAN-Kiri
+ ip address 192.168.10.1 255.255.255.0
+ no shutdown
+exit
+
+! Konfigurasi eBGP AS 100
+router bgp 100
+ neighbor 200.10.10.1 remote-as 200
+ network 200.10.10.0 mask 255.255.255.252
+ network 192.168.10.0 mask 255.255.255.0
+exit
+
+end
+write memory
+
+
+! ----------------------------------------------------------
+! 3. ROUTER KANAN (AS 300)
+! ----------------------------------------------------------
+enable
+configure terminal
+hostname R-Kanan
+
+! Konfigurasi Interface
+interface GigabitEthernet0/0
+ description Link-to-R-Tengah-AS200
+ ip address 200.20.20.2 255.255.255.252
+ no shutdown
+exit
+
+interface GigabitEthernet0/1
+ description Gateway-LAN-Kanan
+ ip address 192.168.20.1 255.255.255.0
+ no shutdown
+exit
+
+! Konfigurasi eBGP AS 300
+router bgp 300
+ neighbor 200.20.20.1 remote-as 200
+ network 200.20.20.0 mask 255.255.255.252
+ network 192.168.20.0 mask 255.255.255.0
+exit
+
+end
+write memory
