@@ -1,0 +1,97 @@
+! ==========================================================
+! SKENARIO 2: EIGRP ROUTING CONFIGURATION (AS 10)
+! Topologi : 3 Router (R-Tengah, R-Kiri, R-Kanan)
+! ==========================================================
+
+
+! ----------------------------------------------------------
+! 1. ROUTER TENGAH (Router0 / R-Atas)
+! ----------------------------------------------------------
+enable
+configure terminal
+hostname R-Tengah
+
+! Konfigurasi Interface
+interface GigabitEthernet0/0
+ description Link-to-R-Kiri
+ ip address 200.10.10.1 255.255.255.252
+ no shutdown
+exit
+
+interface GigabitEthernet0/1
+ description Link-to-R-Kanan
+ ip address 200.20.20.1 255.255.255.252
+ no shutdown
+exit
+
+! Konfigurasi EIGRP AS 10
+router eigrp 10
+ network 200.10.10.0 0.0.0.3
+ network 200.20.20.0 0.0.0.3
+ no auto-summary
+exit
+
+end
+write memory
+
+
+! ----------------------------------------------------------
+! 2. ROUTER KIRI (Router1 / R-Kiri)
+! ----------------------------------------------------------
+enable
+configure terminal
+hostname R-Kiri
+
+! Konfigurasi Interface
+interface GigabitEthernet0/0
+ description Link-to-R-Tengah
+ ip address 200.10.10.2 255.255.255.252
+ no shutdown
+exit
+
+interface GigabitEthernet0/1
+ description Gateway-LAN-Kiri
+ ip address 192.168.10.1 255.255.255.0
+ no shutdown
+exit
+
+! Konfigurasi EIGRP AS 10
+router eigrp 10
+ network 200.10.10.0 0.0.0.3
+ network 192.168.10.0 0.0.0.255
+ no auto-summary
+exit
+
+end
+write memory
+
+
+! ----------------------------------------------------------
+! 3. ROUTER KANAN (Router2 / R-Kanan)
+! ----------------------------------------------------------
+enable
+configure terminal
+hostname R-Kanan
+
+! Konfigurasi Interface
+interface GigabitEthernet0/0
+ description Link-to-R-Tengah
+ ip address 200.20.20.2 255.255.255.252
+ no shutdown
+exit
+
+interface GigabitEthernet0/1
+ description Gateway-LAN-Kanan
+ ip address 192.168.20.1 255.255.255.0
+ no shutdown
+exit
+
+! Konfigurasi EIGRP AS 10
+router eigrp 10
+ network 200.20.20.0 0.0.0.3
+ network 192.168.20.0 0.0.0.255
+ no auto-summary
+exit
+
+end
+write memory
