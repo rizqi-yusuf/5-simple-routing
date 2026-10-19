@@ -1,0 +1,88 @@
+! ==========================================================
+! SKENARIO 1: STATIC ROUTING CONFIGURATION
+! Topologi : 3 Router (R-Tengah, R-Kiri, R-Kanan)
+! ==========================================================
+
+
+! ----------------------------------------------------------
+! 1. ROUTER TENGAH (Router4 / R-Atas)
+! ----------------------------------------------------------
+enable
+configure terminal
+hostname R-Tengah
+
+! Konfigurasi Interface
+interface GigabitEthernet0/0
+ description Link-to-R-Kiri
+ ip address 200.10.10.1 255.255.255.252
+ no shutdown
+exit
+
+interface GigabitEthernet0/1
+ description Link-to-R-Kanan
+ ip address 200.20.20.1 255.255.255.252
+ no shutdown
+exit
+
+! Konfigurasi Static Route (Menuju LAN Kiri & LAN Kanan)
+ip route 192.168.10.0 255.255.255.0 200.10.10.2
+ip route 192.168.20.0 255.255.255.0 200.20.20.2
+
+end
+write memory
+
+
+! ----------------------------------------------------------
+! 2. ROUTER KIRI (Router3 / R-Kiri)
+! ----------------------------------------------------------
+enable
+configure terminal
+hostname R-Kiri
+
+! Konfigurasi Interface
+interface GigabitEthernet0/0
+ description Link-to-R-Tengah
+ ip address 200.10.10.2 255.255.255.252
+ no shutdown
+exit
+
+interface GigabitEthernet0/1
+ description Gateway-LAN-Kiri
+ ip address 192.168.10.1 255.255.255.0
+ no shutdown
+exit
+
+! Konfigurasi Static Route (Menuju Link Kanan & LAN Kanan)
+ip route 200.20.20.0 255.255.255.252 200.10.10.1
+ip route 192.168.20.0 255.255.255.0 200.10.10.1
+
+end
+write memory
+
+
+! ----------------------------------------------------------
+! 3. ROUTER KANAN (Router3(1) / R-Kanan)
+! ----------------------------------------------------------
+enable
+configure terminal
+hostname R-Kanan
+
+! Konfigurasi Interface
+interface GigabitEthernet0/0
+ description Link-to-R-Tengah
+ ip address 200.20.20.2 255.255.255.252
+ no shutdown
+exit
+
+interface GigabitEthernet0/1
+ description Gateway-LAN-Kanan
+ ip address 192.168.20.1 255.255.255.0
+ no shutdown
+exit
+
+! Konfigurasi Static Route (Menuju Link Kiri & LAN Kiri)
+ip route 200.10.10.0 255.255.255.252 200.20.20.1
+ip route 192.168.10.0 255.255.255.0 200.20.20.1
+
+end
+write memory
