@@ -56,7 +56,7 @@ Ikuti langkah-langkah berikut untuk menjalankan simulasi di perangkat kamu:
 ### 2. Langkah Membuka Proyek
 1. **Clone** repositori ini atau unduh langsung file `ROUTING.pkt`:
    ```bash
-   git clone [https://github.com/username-kamu/nama-repo-kamu.git](https://github.com/username-kamu/nama-repo-kamu.git)
+   git clone https://github.com/rizqi-yusuf/5-simple-routing/blob/main/ROUTING.pkt
    ```
 2. Buka aplikasi **Cisco Packet Tracer** dan *login* menggunakan akun Cisco NetAcad / Skills for All kamu.
 3. Klik menu **File > Open**, lalu pilih file **`ROUTING.pkt`**.
